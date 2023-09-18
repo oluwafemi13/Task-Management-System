@@ -21,7 +21,7 @@ namespace Task_Management_System.Controllers
 
 
         [HttpPost("CreateTask")]
-        public async Task<IActionResult> CreateTask([FromBody] Management.Core.Entities.Task task)
+        public async Task<IActionResult> CreateTask([FromBody] TaskDto task)
         {
             try
             {

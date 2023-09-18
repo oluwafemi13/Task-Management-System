@@ -18,11 +18,14 @@ builder.Services.AddDbContext<DatabaseContext>(option =>
     option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 
 });
+
 builder.Services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 builder.Services.AddScoped<ITaskRepository, TaskRepository>();
-builder.Services.AddScoped<IMarkedComplete, MarkedComplete>();
-builder.Services.AddScoped<IUserTaskCompleted, UserTaskCompleted>();
+builder.Services.AddScoped<IWorker, MarkedComplete>();
+builder.Services.AddScoped<IWorker, UserTaskCompleted>();
+builder.Services.AddScoped<IWorker, AssignedNewTask>();
 builder.Services.AddHostedService<MarkedCompletedService>();
+builder.Services.AddHostedService<AssignedNewTaskService>();
 builder.Services.AddHostedService<MarkedUserTaskCompleted>();
 builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
 builder.Services.AddScoped<IProjectService, ProjectService>();
